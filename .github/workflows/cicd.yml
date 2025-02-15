@@ -38,3 +38,7 @@ jobs:
       - name: Terraform Plan
         working-directory: Terraform
         run: terraform plan -var="environment=${{ env.BRANCH_NAME }}"
+      
+      - name: Terrafom Apply
+        working-directory: Terraform
+        run: terraform apply -var="environment=${{ env.BRANCH_NAME }}"
