@@ -41,4 +41,4 @@ jobs:
       
       - name: Terrafom Apply
         working-directory: Terraform
-        run: terraform apply -var="environment=${{ env.BRANCH_NAME }}"
+        run: terraform apply -auto-approve -var="environment=${{ env.BRANCH_NAME }}"
