@@ -1,0 +1,35 @@
+name: Deploy to Azure
+
+on:
+  push:
+    branches:
+      - dev
+      - stage
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name }}
+    env:
+      TF_VAR_environment: ${{ github.ref_name }}
+      TF_VAR_azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      TF_VAR_azure_client_id: ${{ secrets.APPLICATION_ID }}
+      TF_VAR_azure_client_secret: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+      TF_VAR_azure_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract Branch Name
+        run: echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
+      - name: Debug Branch Name
+        run: echo "Deploying to $BRANCH_NAME environment"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init -backend-config="backend-${{ env.BRANCH_NAME }}.conf"
