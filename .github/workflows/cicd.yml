@@ -33,3 +33,6 @@ jobs:
 
       - name: Terraform Init
         run: terraform init -backend-config="backend-${{ env.BRANCH_NAME }}.conf"
+
+      - name: Terraform Plan
+        run: terraform plan -var="environment"=${{ env.BRANCH_NAME }}"
