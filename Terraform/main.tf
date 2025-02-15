@@ -18,19 +18,19 @@ resource "azurerm_key_vault" "key" {
 }
 
 resource "azurerm_private_dns_zone" "dns" {
-  name                = "jti-${var.environment}-sql.mysql.database.azure.com"
+  name                = "jti${var.environment}sql.mysql.database.azure.com"
   resource_group_name = azurerm_resource_group.rg.name
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "example" {
-  name                  = "jti-${var.environment}-sql.com"
+  name                  = "jti${var.environment}sql.com"
   private_dns_zone_name = azurerm_private_dns_zone.dns.name
   virtual_network_id    = azurerm_virtual_network.vnet.id
   resource_group_name   = azurerm_resource_group.rg.name
 }
 
 resource "azurerm_mysql_flexible_server" "sql" {
-  name                   = "jti-${var.environment}-sql"
+  name                   = "jti${var.environment}sql"
   resource_group_name    = azurerm_resource_group.rg.name
   location               = azurerm_resource_group.rg.location
   administrator_login    = "achim"
