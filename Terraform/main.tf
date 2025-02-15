@@ -32,7 +32,7 @@ resource "azurerm_mysql_flexible_server" "sql" {
   name                   = "jti-${var.environment}-sql"
   resource_group_name    = azurerm_resource_group.rg.name
   location               = azurerm_resource_group.rg.location
-  administrator_login    = "admin"
+  administrator_login    = "achim"
   administrator_password = random_password.password.result
   backup_retention_days  = 7
   delegated_subnet_id    = azurerm_subnet.subnetsql.id

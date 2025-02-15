@@ -19,7 +19,7 @@ resource "azurerm_subnet" "subnetwebapp" {
   delegation {
     name = "fs"
     service_delegation {
-      name = "Microsoft.Web/serverfarms"
+      name = "Microsoft.Web/serverFarms"
       actions = [
         "Microsoft.Network/virtualNetworks/subnets/action",
       ]
