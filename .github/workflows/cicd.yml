@@ -31,6 +31,9 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: az login
+        run: az login --service-principal -u ${{ secrets.APPLICATION_ID }} -p ${{ secrets.AZURE_CLIENT_PASSWORD }} -t ${{ secrets.AZURE_TENANT_ID }}
+
       - name: Terraform Init
         working-directory: Terraform
         run: terraform init -backend-config="backend-${{ env.BRANCH_NAME }}.conf"
