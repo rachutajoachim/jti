@@ -18,7 +18,7 @@ resource "azurerm_key_vault" "key" {
 }
 
 resource "azurerm_private_dns_zone" "dns" {
-  name                = "jti${var.environment}sql.mysql.database.azure.com"
+  name                = "jti${var.environment}.sql.mysql.database.azure.com"
   resource_group_name = azurerm_resource_group.rg.name
 }
 
