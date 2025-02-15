@@ -13,10 +13,10 @@ jobs:
     environment: ${{ github.ref_name }}
     env:
       TF_VAR_environment: ${{ github.ref_name }}
-      TF_VAR_azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      TF_VAR_azure_client_id: ${{ secrets.APPLICATION_ID }}
-      TF_VAR_azure_client_secret: ${{ secrets.AZURE_CLIENT_PASSWORD }}
-      TF_VAR_azure_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_CLIENT_ID: ${{ secrets.APPLICATION_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_PASSWORD }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
     steps:
       - name: Checkout repository
@@ -30,9 +30,6 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
-
-      - name: az login
-        run: az login --service-principal -u ${{ secrets.APPLICATION_ID }} -p ${{ secrets.AZURE_CLIENT_PASSWORD }} -t ${{ secrets.AZURE_TENANT_ID }}
 
       - name: Terraform Init
         working-directory: Terraform
