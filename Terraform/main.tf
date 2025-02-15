@@ -18,15 +18,28 @@ resource "azurerm_key_vault" "key" {
 }
 
 resource "azurerm_private_dns_zone" "dns" {
-  name                = "jti${var.environment}.sql.mysql.database.azure.com"
+  name                = "privatelink.mysql.database.azure.com"
   resource_group_name = azurerm_resource_group.rg.name
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "example" {
-  name                  = "jti${var.environment}sql.com"
+  name                  = "jti${var.environment}-mysql-vnet-link"
   private_dns_zone_name = azurerm_private_dns_zone.dns.name
   virtual_network_id    = azurerm_virtual_network.vnet.id
   resource_group_name   = azurerm_resource_group.rg.name
+}
+resource "azurerm_private_endpoint" "mysql_private_endpoint" {
+  name                = "jti${var.environment}-mysql-pep"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  subnet_id           = azurerm_subnet.subnetsql.id 
+
+  private_service_connection {
+    name                           = "jti${var.environment}-mysql-psc"
+    private_connection_resource_id = azurerm_mysql_flexible_server.sql.id
+    is_manual_connection           = false
+    subresource_names              = ["mysqlServer"]
+  }
 }
 
 resource "azurerm_mysql_flexible_server" "sql" {
@@ -39,6 +52,7 @@ resource "azurerm_mysql_flexible_server" "sql" {
   delegated_subnet_id    = azurerm_subnet.subnetsql.id
   private_dns_zone_id    = azurerm_private_dns_zone.dns.id
   sku_name               = "B_Standard_B1ms"
+  public_network_access_enabled = false
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.example]
 }
