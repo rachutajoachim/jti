@@ -52,7 +52,6 @@ resource "azurerm_mysql_flexible_server" "sql" {
   delegated_subnet_id    = azurerm_subnet.subnetsql.id
   private_dns_zone_id    = azurerm_private_dns_zone.dns.id
   sku_name               = "B_Standard_B1ms"
-  public_network_access_enabled = false
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.example]
 }
