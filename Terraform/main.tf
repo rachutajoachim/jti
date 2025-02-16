@@ -54,11 +54,19 @@ resource "azurerm_mysql_flexible_server" "sql" {
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.example]
 }
+
 resource "azurerm_key_vault_secret" "secret" {
   name         = "sqlpassword"
   value        = random_password.password.result
   key_vault_id = azurerm_key_vault.key.id
 }
+
+data "azurerm_key_vault_secret" "sqlpassword" {
+  name         = azurerm_key_vault_secret.secret.name
+  key_vault_id = azurerm_key_vault.key.id
+}
+
+
 resource "azurerm_mysql_flexible_database" "example" {
   name                = "jti"
   resource_group_name = azurerm_resource_group.rg.name
