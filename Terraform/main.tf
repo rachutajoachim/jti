@@ -32,7 +32,7 @@ resource "azurerm_private_endpoint" "mysql_private_endpoint" {
   name                = "jti${var.environment}-mysql-pep"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  subnet_id           = azurerm_subnet.subnetpe.id 
+  subnet_id           = azurerm_subnet.subnetsql.id 
 
   private_service_connection {
     name                           = "jti${var.environment}-mysql-psc"

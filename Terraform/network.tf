@@ -36,5 +36,3 @@ resource "azurerm_subnet" "subnetwebapp" {
   }
 }
 
-
-
