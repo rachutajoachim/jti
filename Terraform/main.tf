@@ -76,7 +76,7 @@ resource "azurerm_mysql_flexible_database" "example" {
 }
 
 resource "azurerm_dns_a_record" "example" {
-  name                = "jit${var.envrionment}sql"
+  name                = "jit${var.environment}sql"
   zone_name           = azurerm_private_dns_zone.dns.name
   resource_group_name = azurerm_resource_group.rg.name
   ttl                 = 300
