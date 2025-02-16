@@ -74,3 +74,11 @@ resource "azurerm_mysql_flexible_database" "example" {
   charset             = "utf8"
   collation           = "utf8_unicode_ci"
 }
+
+resource "azurerm_dns_a_record" "example" {
+  name                = "jit@{var.envrionment}sql"
+  zone_name           = azurerm_dns_zone.dns.name
+  resource_group_name = azurerm_resource_group.rg.name
+  ttl                 = 300
+  records             = [azurerm_private_endpoint.mysql_private_endpoint.private_service_connection[0].private_ip_address]
+}
