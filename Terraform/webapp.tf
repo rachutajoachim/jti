@@ -24,3 +24,7 @@ resource "azurerm_linux_web_app" "app" {
     "DB_PORT"                         = 3306
   }
 }
+resource "azurerm_app_service_virtual_network_swift_connection" "connect" {
+  app_service_id = azurerm_linux_web_app.app.id
+  subnet_id      = azurerm_subnet.subnetwebapp.id
+}
