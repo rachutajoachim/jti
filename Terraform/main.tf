@@ -49,7 +49,6 @@ resource "azurerm_mysql_flexible_server" "sql" {
   administrator_login    = "achim"
   administrator_password = random_password.password.result
   backup_retention_days  = 7
-  delegated_subnet_id    = azurerm_subnet.subnetsql.id
   private_dns_zone_id    = azurerm_private_dns_zone.dns.id
   sku_name               = "B_Standard_B1ms"
 
