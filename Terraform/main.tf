@@ -40,10 +40,6 @@ resource "azurerm_private_endpoint" "mysql_private_endpoint" {
     is_manual_connection           = false
     subresource_names              = ["mysqlServer"]
   }
-  ip_configuration {
-    name = "sqlprivate"
-    private_ip_address = "10.0.0.20"
-  }
 }
 
 resource "azurerm_mysql_flexible_server" "sql" {
