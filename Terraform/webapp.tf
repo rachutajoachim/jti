@@ -18,9 +18,9 @@ resource "azurerm_linux_web_app" "app" {
   site_config {}
   app_settings = {
     "DB_HOST"                         = azurerm_mysql_flexible_server.sql.name
-    "DB_USER"                         = achim
+    "DB_USER"                         = "achim"
     "DB_PASS"                         = data.azurerm_key_vault_secret.sqlpassword.value
-    "DB_NAME"                         = jti
+    "DB_NAME"                         = "jti"
     "DB_PORT"                         = 3306
   }
 }
