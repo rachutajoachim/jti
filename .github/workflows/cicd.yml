@@ -37,7 +37,7 @@ jobs:
 
       - name: Terraform destroy
         working-directory: Terraform
-        run: terraform destroy -var="environment=${{ env.BRANCH_NAME }}"
+        run: terraform destroy -auto-approve -var="environment=${{ env.BRANCH_NAME }}"
 
       - name: Terraform Plan
         working-directory: Terraform
