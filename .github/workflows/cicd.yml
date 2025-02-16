@@ -35,10 +35,6 @@ jobs:
         working-directory: Terraform
         run: terraform init -backend-config="backend-${{ env.BRANCH_NAME }}.conf"
 
-      - name: Terrafom Destroy
-        working-directory: Terraform
-        run: terraform destroy -auto-approve -var="environment=${{ env.BRANCH_NAME }}"
-
       - name: Terraform Plan
         working-directory: Terraform
         run: terraform plan -var="environment=${{ env.BRANCH_NAME }}"
