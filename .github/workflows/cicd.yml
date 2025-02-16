@@ -35,6 +35,10 @@ jobs:
         working-directory: Terraform
         run: terraform init -backend-config="backend-${{ env.BRANCH_NAME }}.conf"
 
+      - name: Terraform destroy
+        working-directory: Terraform
+        run: terraform destroy -var="environment=${{ env.BRANCH_NAME }}"
+
       - name: Terraform Plan
         working-directory: Terraform
         run: terraform plan -var="environment=${{ env.BRANCH_NAME }}"
