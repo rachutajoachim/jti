@@ -27,6 +27,7 @@ resource "azurerm_linux_web_app" "app" {
     "DB_PASS"                         = data.azurerm_key_vault_secret.sqlpassword.value
     "DB_NAME"                         = "jti"
     "DB_PORT"                         = 3306
+    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
   }
 }
 resource "azurerm_app_service_virtual_network_swift_connection" "connect" {
