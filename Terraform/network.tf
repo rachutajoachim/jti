@@ -15,7 +15,7 @@ resource "azurerm_subnet" "subnetsql" {
     service_delegation {
       name = "Microsoft.DBforMySQL/flexibleServers"
       actions = [
-       "Microsoft.Network/virtualNetworks/subnets/action"
+       "Microsoft.Network/virtualNetworks/subnets/join/action"
       ]
     }
   }
