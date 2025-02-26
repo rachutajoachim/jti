@@ -82,5 +82,5 @@ resource "azurerm_dns_a_record" "example" {
   ttl                 = 10
   records             = [azurerm_private_endpoint.mysql_private_endpoint.private_service_connection[0].private_ip_address]
 
-      depends_on = [azurerm_private_dns_zone.dns, azurerm_private_endpoint.mysql_private_endpoint]
+      depends_on = [azurerm_private_dns_zone.dns, azurerm_private_endpoint.mysql_private_endpoint, azurerm_private_dns_zone_virtual_network_link.example]
 }
