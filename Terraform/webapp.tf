@@ -15,7 +15,9 @@ resource "azurerm_linux_web_app" "app" {
     type = "SystemAssigned"
   }
 
-  site_config {}
+  site_config {
+    use_32_bit_worker_process = true
+  }
   app_settings = {
     "DB_HOST"                         = "${azurerm_mysql_flexible_server.sql.name}.mysql.database.azure.com"
     "DB_USER"                         = "achim"

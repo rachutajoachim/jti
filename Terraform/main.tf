@@ -40,6 +40,10 @@ resource "azurerm_private_endpoint" "mysql_private_endpoint" {
     is_manual_connection           = false
     subresource_names              = ["mysqlServer"]
   }
+  
+  lifecycle {
+    ignore_changes = [private_service_connection]
+  }
 }
 
 resource "azurerm_mysql_flexible_server" "sql" {
@@ -51,6 +55,10 @@ resource "azurerm_mysql_flexible_server" "sql" {
   backup_retention_days  = 7
   private_dns_zone_id    = azurerm_private_dns_zone.dns.id
   sku_name               = "B_Standard_B1ms"
+
+  lifecycle {
+    ignore_changes = [private_dns_zone_id, storage, zone]
+  }
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.example]
 }
