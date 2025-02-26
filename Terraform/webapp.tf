@@ -17,6 +17,7 @@ resource "azurerm_linux_web_app" "app" {
   }
 
   site_config {
+    container_registry_use_managed_identity = true
     use_32_bit_worker = true
     always_on         = false
   }
