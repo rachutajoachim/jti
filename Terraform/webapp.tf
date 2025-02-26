@@ -17,6 +17,7 @@ resource "azurerm_linux_web_app" "app" {
 
   site_config {
     use_32_bit_worker = true
+    always_on         = false
   }
   app_settings = {
     "DB_HOST"                         = "${azurerm_mysql_flexible_server.sql.name}.mysql.database.azure.com"
