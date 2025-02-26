@@ -81,6 +81,6 @@ resource "azurerm_dns_a_record" "example" {
   resource_group_name = azurerm_resource_group.rg.name
   ttl                 = 300
   records             = [azurerm_private_endpoint.mysql_private_endpoint.private_service_connection[0].private_ip_address]
-  
-    depends_on = [azurerm_private_dns_zone.dns]
+
+      depends_on = [azurerm_private_dns_zone.dns, azurerm_private_endpoint.mysql_private_endpoint]
 }
