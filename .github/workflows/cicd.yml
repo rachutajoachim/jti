@@ -35,6 +35,11 @@ jobs:
         working-directory: Terraform
         run: terraform init -backend-config="backend-${{ env.BRANCH_NAME }}.conf"
 
+     - name: Terrafom Apply
+        working-directory: Terraform
+        run: terraform apply -auto-approve -var="environment=${{ env.BRANCH_NAME }}"
+        
+
       - name: Terraform Plan
         working-directory: Terraform
         run: terraform plan -var="environment=${{ env.BRANCH_NAME }}"
